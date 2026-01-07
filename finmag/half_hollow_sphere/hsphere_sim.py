@@ -11,7 +11,7 @@ import dolfin as df
 import numpy as np
 import finmag
 from finmag import Simulation as Sim
-from finmag.energies import Exchange, DMI, Demag, UniaxialAnisotropy, Zeeman, UniaxialAnisotropyCylindrical
+from finmag.energies import Exchange, DMI, Demag, UniaxialAnisotropy, Zeeman
 from finmag.util.consts import mu0
 import os
 
@@ -65,15 +65,15 @@ sim.set_m((0., 0.1, 0.9))
 # bzstep = 10.
 # mT = 1e-3 / mu0
 
-DATA_DIR = '{}_data'.format(args.sim_name)
+DATA_DIR = 'sim_output'
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
 # TODO: Check where log file is saved
 
-# Relax the system
+# Relax the system at zero field
 sim.save_vtk('{}/m_initial.pvd'.format(DATA_DIR), overwrite=False)
-#sim.relax(stopping_dmdt=1e-1)
+sim.relax(stopping_dmdt=1e-1)
 
 # Save the last relaxed state
 # sim.save_vtk('{}/m.pvd'.format(DATA_DIR, int(bz)), overwrite=False)
