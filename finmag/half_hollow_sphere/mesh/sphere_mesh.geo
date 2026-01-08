@@ -23,7 +23,7 @@ BooleanDifference(3) = { Volume{1}; Delete; } { Volume{2}; Delete; };
 // Create a box that will cut the sphere in half (e.g., in the negative Z direction)
 // Dimensions for a large enough box to cover half the sphere
 box_size = outer_radius * 2;
-Box(4) = {-box_size/2, -box_size/2, -box_size, box_size, box_size, box_size};
+Box(4) = {-box_size/2, -box_size/2, box_size, box_size, box_size, -box_size};
 
 // Perform a boolean intersection to keep only the upper half (Z > 0)
 // Syntax: BooleanIntersection(result_tag) = {object_1} {object_2};
