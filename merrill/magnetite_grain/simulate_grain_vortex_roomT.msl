@@ -1,0 +1,23 @@
+! MERRILL development version 2.X
+
+! Setup material constants for Magnetite at 20
+! Degrees Celsius
+Material : Type = Magnetite, TempC =20
+
+! Load mesh from tec file (can also be Patran)
+Set: maxMeshNumber=1
+ReadMesh: mesh=1, filename=../mesh/PLAG-50_stl_NOMAG.tec, FileType=tecplot
+
+! A vortex state will nucleate from a rough
+! vortex state with core aligned along
+! the easy axis
+Vortex axis=1;1;1 origin=0;0;0 strength=0.5 chirality=LH
+
+WriteMagnetization filename=grain50_initial
+
+! Run the minimizer
+Minimize
+
+! Output the solution M to two files: soln.dat and
+! soln_mult.tec
+WriteMagnetization filename=grain50_final
